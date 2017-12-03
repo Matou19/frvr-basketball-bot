@@ -8,13 +8,13 @@ import time
 m = PyMouse()
 
 def getimgpos(im1, im2):
-		needle = cv2.imread(im1)
-		haystack = cv2.imread(im2)
-		
-		result = cv2.matchTemplate(needle,haystack,cv2.TM_CCOEFF_NORMED)
-		y,x = np.unravel_index(result.argmax(), result.shape)
-		width, height,ch = needle.shape
-		return x+width/2,y+height/2
+	needle = cv2.imread(im1)
+	haystack = cv2.imread(im2)
+	
+	result = cv2.matchTemplate(needle,haystack,cv2.TM_CCOEFF_NORMED)
+	y,x = np.unravel_index(result.argmax(), result.shape)
+	width, height,ch = needle.shape
+	return x+width/2,y+height/2
 	
 while True:
 	#get screenshot
