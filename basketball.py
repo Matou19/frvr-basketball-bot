@@ -6,14 +6,15 @@ from pymouse import PyMouse
 import time
 
 m = PyMouse()
+hoop = cv2.imread("basketball_hoop.png")
+ball = cv2.imread("basketball_ball.png")
 
 def getimgpos(im1, im2):
-	needle = cv2.imread(im1)
 	haystack = cv2.imread(im2)
 	
-	result = cv2.matchTemplate(needle,haystack,cv2.TM_CCOEFF_NORMED)
+	result = cv2.matchTemplate(im1,haystack,cv2.TM_CCOEFF_NORMED)
 	y,x = np.unravel_index(result.argmax(), result.shape)
-	width, height,ch = needle.shape
+	width, height,ch = im1.shape
 	return x+width/2,y+height/2
 	
 while True:
@@ -25,8 +26,8 @@ while True:
 	pb.save("basketball_ss.png","png")
 	
 	#get positions of "things"
-	x,y = getimgpos("basketball_hoop.png", "basketball_ss.png")
-	ballx,bally = getimgpos("basketball_ball.png", "basketball_ss.png")
+	x,y = getimgpos(hoop, "basketball_ss.png")
+	ballx,bally = getimgpos(ball, "basketball_ss.png")
 	mousex,mousey = m.position()
 	
 	print("Mouse position: " + str((mousex,mousey)))
